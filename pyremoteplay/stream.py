@@ -341,7 +341,8 @@ class RPStream:
             encrypted_key = b""
             ecdh_pub_key = None
             ecdh_sig = None
-            client_version = 7
+            #Jeffser: Added missing if statement to get the version of the client
+            client_version = 12 if self._session.type == TYPE_PS5 else 9
 
         data = ProtoHandler.big_payload(
             client_version=client_version,

@@ -132,7 +132,11 @@ def add_regist_data(profile: dict, host_status: dict, data: dict) -> dict:
 
 def format_regist_key(regist_key: str) -> str:
     """Format Regist Key for wakeup."""
-    return str(int.from_bytes(bytes.fromhex(bytes.fromhex(regist_key).decode()), "big"))
+    first = bytes.fromhex(regist_key).decode()
+    if len(first) % 2 != 0:
+        first = "0" + first
+    #Jeffser: Patched cause it didn't work idk
+    return str(int.from_bytes(bytes.fromhex(first), "big"))
 
 
 def log_bytes(name: str, data: bytes):
